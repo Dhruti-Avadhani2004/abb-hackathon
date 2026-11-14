@@ -1,0 +1,27 @@
+
+Setup plugins...
+Collect file inventory...
+Scan files for: info, packages, licenses, copyrights with 3 process(es)...
+
+Scanning done.
+Summary:        info, packages, licenses, copyrights with 3 process(es)
+Errors count:   0
+Scan Speed:     0.62 files/sec. 3.47 KB/sec.
+Initial counts: 1666 resource(s): 1397 file(s) and 269 directorie(s) 
+Final counts:   287 resource(s): 18 file(s) and 269 directorie(s) for 100.87 KB
+Timings:
+  scan_start: 2026-11-14T164800.884770
+  scan_end:   2026-11-14T164840.307752
+  setup_scan:licenses: 7.71s
+  setup: 7.71s
+  inventory: 1.72s
+  pre-scan:ignore: 0.38s
+  pre-scan: 0.38s
+  scan:packages: 0.17s
+  scan: 29.11s
+  post-scan:summary: 0.19s
+  post-scan: 0.24s
+  output:json-pp: 0.34s
+  output: 0.34s
+  total: 39.79s
+Removing temporary files...done.

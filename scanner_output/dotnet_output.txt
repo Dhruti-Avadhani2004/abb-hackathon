@@ -1,0 +1,11 @@
+
+Project: C:\Users\dhrut\OneDrive\Desktop\abb_hackathon\sgc-gatekeeper-testbed\DotNetVulnerabilityTest.csproj
+
+The following sources were used:
+   https://api.nuget.org/v3/index.json
+
+Project `DotNetVulnerabilityTest` has the following vulnerable packages
+   [net10.0]: 
+   Top-level Package                          Requested   Resolved   Severity   Advisory URL                                     
+   > Microsoft.Extensions.Caching.Memory      6.0.1       6.0.1      High       https://github.com/advisories/GHSA-qj66-m88j-hmgj
+

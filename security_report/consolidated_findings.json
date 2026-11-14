@@ -1,0 +1,4082 @@
+{
+  "repository": "sgc-gatekeeper-testbed",
+  "generated_at": "2026-11-14T17:55:01.448930+00:00",
+  "inputs": {
+    "semgrep": "semgrep_output.json",
+    "trivy": "trivy_output_offline.json",
+    "bandit": "bandit_output.json",
+    "eslint": "eslint_output.json",
+    "gitleaks": "gitleaks_output.json",
+    "scancode": "scancode_output.json",
+    "cyclonedx": "sbom_cyclonedx.json",
+    "spdx": "sbom_spdx.json",
+    "dotnet": "dotnet_output.txt"
+  },
+  "warnings": [],
+  "findings": [
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Detected calls to child_process from a function argument `req`. This could lead to a command injection if the input is user controllable. Try to avoid calls to child_process, and if it is needed ensure user input is corr",
+      "severity": "HIGH",
+      "path": "broken_gate.js",
+      "line": 10,
+      "rule": "scanner_output.semgrep-configs.javascript.lang.security.detect-child-process",
+      "description": "Detected calls to child_process from a function argument `req`. This could lead to a command injection if the input is user controllable. Try to avoid calls to child_process, and if it is needed ensure user input is correctly sanitized or sandboxed. ",
+      "cwe": [
+        "CWE-78"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html#do-not-use-dangerous-functions",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "bf377183ebe0fc81"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Detected the use of eval(). eval() can be dangerous if used to evaluate dynamic content. If this content can be input from outside the program, this may be a code injection vulnerability. Ensure evaluated content is not ",
+      "severity": "MEDIUM",
+      "path": "broken_gate.js",
+      "line": 20,
+      "rule": "scanner_output.semgrep-configs.javascript.browser.security.eval-detected",
+      "description": "Detected the use of eval(). eval() can be dangerous if used to evaluate dynamic content. If this content can be input from outside the program, this may be a code injection vulnerability. Ensure evaluated content is not definable by external sources.",
+      "cwe": [
+        "CWE-95"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://owasp.org/Top10/A03_2021-Injection",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "a7e4a34b3682d2e1"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Found data from an Express or Next web request flowing to `eval`. If this data is user-controllable this can lead to execution of arbitrary system commands in the context of your application process. Avoid `eval` wheneve",
+      "severity": "HIGH",
+      "path": "broken_gate.js",
+      "line": 20,
+      "rule": "scanner_output.semgrep-configs.javascript.lang.security.audit.code-string-concat",
+      "description": "Found data from an Express or Next web request flowing to `eval`. If this data is user-controllable this can lead to execution of arbitrary system commands in the context of your application process. Avoid `eval` whenever possible.",
+      "cwe": [
+        "CWE-95"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval",
+      "confidence": "HIGH",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "eb61cb176566abda"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "It looks like MD5 is used as a password hash. MD5 is not considered a secure password hash because it can be cracked by an attacker in a short amount of time. Use a suitable password hashing function such as bcrypt. You ",
+      "severity": "MEDIUM",
+      "path": "broken_gate.js",
+      "line": 26,
+      "rule": "scanner_output.semgrep-configs.javascript.lang.security.audit.md5-used-as-password",
+      "description": "It looks like MD5 is used as a password hash. MD5 is not considered a secure password hash because it can be cracked by an attacker in a short amount of time. Use a suitable password hashing function such as bcrypt. You can use the `bcrypt` node.js package.",
+      "cwe": [
+        "CWE-327"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://tools.ietf.org/id/draft-lvelvindron-tls-md5-sha1-deprecate-01.html",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "cab20178f31b145f"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "A gitleaks aws-access-token was detected which attempts to identify hard-coded credentials. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or ",
+      "severity": "INFO",
+      "path": "config.py",
+      "line": 1,
+      "rule": "scanner_output.semgrep-configs.generic.secrets.gitleaks.aws-access-token",
+      "description": "A gitleaks aws-access-token was detected which attempts to identify hard-coded credentials. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+      "cwe": [
+        "CWE-798"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "99b03e99c83672b5"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "A gitleaks stripe-access-token was detected which attempts to identify hard-coded credentials. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal ",
+      "severity": "INFO",
+      "path": "config.py",
+      "line": 6,
+      "rule": "scanner_output.semgrep-configs.generic.secrets.gitleaks.stripe-access-token",
+      "description": "A gitleaks stripe-access-token was detected which attempts to identify hard-coded credentials. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+      "cwe": [
+        "CWE-798"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "8645630ed4be831e"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Private Key detected. This is a sensitive credential and should not be hardcoded here. Instead, store this in a separate, private file.",
+      "severity": "HIGH",
+      "path": "config.py",
+      "line": 8,
+      "rule": "scanner_output.semgrep-configs.generic.secrets.security.detected-private-key",
+      "description": "Private Key detected. This is a sensitive credential and should not be hardcoded here. Instead, store this in a separate, private file.",
+      "cwe": [
+        "CWE-798"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "d298d18ff9d8029d"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "A gitleaks private-key was detected which attempts to identify hard-coded credentials. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or exter",
+      "severity": "INFO",
+      "path": "config.py",
+      "line": 8,
+      "rule": "scanner_output.semgrep-configs.generic.secrets.gitleaks.private-key",
+      "description": "A gitleaks private-key was detected which attempts to identify hard-coded credentials. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+      "cwe": [
+        "CWE-798"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "e526b3a18935daf4"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Google (GCM) Service account detected",
+      "severity": "HIGH",
+      "path": "credentials.json",
+      "line": 2,
+      "rule": "scanner_output.semgrep-configs.generic.secrets.security.detected-google-gcm-service-account",
+      "description": "Google (GCM) Service account detected",
+      "cwe": [
+        "CWE-798"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "dcae19129c41bb28"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "A gitleaks private-key was detected which attempts to identify hard-coded credentials. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or exter",
+      "severity": "INFO",
+      "path": "credentials.json",
+      "line": 5,
+      "rule": "scanner_output.semgrep-configs.generic.secrets.gitleaks.private-key",
+      "description": "A gitleaks private-key was detected which attempts to identify hard-coded credentials. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+      "cwe": [
+        "CWE-798"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "f194959ed8c5f16d"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Service 'db' allows for privilege escalation via setuid or setgid binaries. Add 'no-new-privileges:true' in 'security_opt' to prevent this.",
+      "severity": "MEDIUM",
+      "path": "docker-compose.yml",
+      "line": 3,
+      "rule": "scanner_output.semgrep-configs.yaml.docker-compose.security.no-new-privileges",
+      "description": "Service 'db' allows for privilege escalation via setuid or setgid binaries. Add 'no-new-privileges:true' in 'security_opt' to prevent this.",
+      "cwe": [
+        "CWE-732"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://raesene.github.io/blog/2019/06/01/docker-capabilities-and-no-new-privs/",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "12b94f4fd1a1138c"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Service 'db' is running with a writable root filesystem. This may allow malicious applications to download and run additional payloads, or modify container files. If an application inside a container has to save somethin",
+      "severity": "MEDIUM",
+      "path": "docker-compose.yml",
+      "line": 3,
+      "rule": "scanner_output.semgrep-configs.yaml.docker-compose.security.writable-filesystem-service",
+      "description": "Service 'db' is running with a writable root filesystem. This may allow malicious applications to download and run additional payloads, or modify container files. If an application inside a container has to save something temporarily consider using a tmpfs. Add 'read_only: true' to this service to prevent this.",
+      "cwe": [
+        "CWE-732"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://docs.docker.com/compose/compose-file/compose-file-v3/#domainname-hostname-ipc-mac_address-privileged-read_only-shm_size-stdin_open-tty-user-working_dir",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "ae412a16918f7432"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "User-controlled data from a request is passed to 'execute()'. This could lead to a SQL injection and therefore protected information could be leaked. Instead, use django's QuerySets, which are built with query parameteri",
+      "severity": "MEDIUM",
+      "path": "kitchen_sink.py",
+      "line": 11,
+      "rule": "scanner_output.semgrep-configs.python.django.security.injection.sql.sql-injection-db-cursor-execute",
+      "description": "User-controlled data from a request is passed to 'execute()'. This could lead to a SQL injection and therefore protected information could be leaked. Instead, use django's QuerySets, which are built with query parameterization and therefore not vulnerable to sql injection. For example, you could use `Entry.objects.filter(date=2006)`.",
+      "cwe": [
+        "CWE-89"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://docs.djangoproject.com/en/3.0/topics/security/#sql-injection-protection",
+      "confidence": "MEDIUM",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "8c439697f0829e34"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Request data detected in os.system. This could be vulnerable to a command injection and should be avoided. If this must be done, use the 'subprocess' module instead and pass the arguments as a list. See https://owasp.org",
+      "severity": "HIGH",
+      "path": "kitchen_sink.py",
+      "line": 12,
+      "rule": "scanner_output.semgrep-configs.python.django.security.injection.command.command-injection-os-system",
+      "description": "Request data detected in os.system. This could be vulnerable to a command injection and should be avoided. If this must be done, use the 'subprocess' module instead and pass the arguments as a list. See https://owasp.org/www-community/attacks/Command_Injection for more information.",
+      "cwe": [
+        "CWE-78"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://owasp.org/www-community/attacks/Command_Injection",
+      "confidence": "MEDIUM",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "1360e2722cd599dd"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Detected possible formatted SQL query. Use parameterized queries instead.",
+      "severity": "MEDIUM",
+      "path": "kitchen_sink.py",
+      "line": 18,
+      "rule": "scanner_output.semgrep-configs.python.lang.security.audit.formatted-sql-query",
+      "description": "Detected possible formatted SQL query. Use parameterized queries instead.",
+      "cwe": [
+        "CWE-89"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://stackoverflow.com/questions/775296/mysql-parameterized-queries",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "8babed426c98ac14"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. In order to execute raw query safely, prepared statement should be used. SQLAlchemy provides TextualSQL to e",
+      "severity": "HIGH",
+      "path": "kitchen_sink.py",
+      "line": 18,
+      "rule": "scanner_output.semgrep-configs.python.sqlalchemy.security.sqlalchemy-execute-raw-query",
+      "description": "Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. In order to execute raw query safely, prepared statement should be used. SQLAlchemy provides TextualSQL to easily used prepared statement with named parameters. For complex SQL composition, use SQL Expression Language or Schema Definition Language. In most cases, SQLAlchemy ORM will be a better option.",
+      "cwe": [
+        "CWE-89"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-textual-sql",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "c90111fc4af8d251"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Detected user input used to manually construct a SQL string. This is usually bad practice because manual construction could accidentally result in a SQL injection. An attacker could use a SQL injection to steal or modify",
+      "severity": "HIGH",
+      "path": "kitchen_sink.py",
+      "line": 18,
+      "rule": "scanner_output.semgrep-configs.python.django.security.injection.tainted-sql-string",
+      "description": "Detected user input used to manually construct a SQL string. This is usually bad practice because manual construction could accidentally result in a SQL injection. An attacker could use a SQL injection to steal or modify contents of the database. Instead, use a parameterized query which is available by default in most database engines. Alternatively, consider using the Django object-relational mappers (ORM) instead of raw SQL queries.",
+      "cwe": [
+        "CWE-915"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://docs.djangoproject.com/en/3.0/topics/security/#sql-injection-protection",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "d215c1aa9319ba78"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Detected user input used to manually construct a SQL string. This is usually bad practice because manual construction could accidentally result in a SQL injection. An attacker could use a SQL injection to steal or modify",
+      "severity": "HIGH",
+      "path": "kitchen_sink.py",
+      "line": 18,
+      "rule": "scanner_output.semgrep-configs.python.flask.security.injection.tainted-sql-string",
+      "description": "Detected user input used to manually construct a SQL string. This is usually bad practice because manual construction could accidentally result in a SQL injection. An attacker could use a SQL injection to steal or modify contents of the database. Instead, use a parameterized query which is available by default in most database engines. Alternatively, consider using an object-relational mapper (ORM) such as SQLAlchemy which will protect your queries.",
+      "cwe": [
+        "CWE-704"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-textual-sql",
+      "confidence": "MEDIUM",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "ad17013d0b9011f1"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "User data detected in os.system. This could be vulnerable to a command injection and should be avoided. If this must be done, use the 'subprocess' module instead and pass the arguments as a list.",
+      "severity": "HIGH",
+      "path": "kitchen_sink.py",
+      "line": 22,
+      "rule": "scanner_output.semgrep-configs.python.flask.security.injection.os-system-injection",
+      "description": "User data detected in os.system. This could be vulnerable to a command injection and should be avoided. If this must be done, use the 'subprocess' module instead and pass the arguments as a list.",
+      "cwe": [
+        "CWE-78"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://owasp.org/www-community/attacks/Command_Injection",
+      "confidence": "MEDIUM",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "b744ae66c5ffe9a9"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Found dynamic content used in a system call. This is dangerous if external data can reach this function call because it allows a malicious actor to execute commands. Use the 'subprocess' module instead, which is easier t",
+      "severity": "HIGH",
+      "path": "kitchen_sink.py",
+      "line": 22,
+      "rule": "scanner_output.semgrep-configs.python.lang.security.audit.dangerous-system-call-audit",
+      "description": "Found dynamic content used in a system call. This is dangerous if external data can reach this function call because it allows a malicious actor to execute commands. Use the 'subprocess' module instead, which is easier to use without accidentally exposing a command injection vulnerability.",
+      "cwe": [
+        "CWE-78"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://semgrep.dev/docs/cheat-sheets/python-command-injection/",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "f83594e640474b98"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Found user-controlled data used in a system call. This could allow a malicious actor to execute commands. Use the 'subprocess' module instead, which is easier to use without accidentally exposing a command injection vuln",
+      "severity": "HIGH",
+      "path": "kitchen_sink.py",
+      "line": 22,
+      "rule": "scanner_output.semgrep-configs.python.lang.security.dangerous-system-call",
+      "description": "Found user-controlled data used in a system call. This could allow a malicious actor to execute commands. Use the 'subprocess' module instead, which is easier to use without accidentally exposing a command injection vulnerability.",
+      "cwe": [
+        "CWE-78"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://semgrep.dev/docs/cheat-sheets/python-command-injection/",
+      "confidence": "MEDIUM",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "b367dfef3ca92320"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Detected the use of an insecure deserialization library in a Flask route. These libraries are prone to code execution vulnerabilities. Ensure user data does not enter this function. To fix this, try to avoid serializing ",
+      "severity": "HIGH",
+      "path": "kitchen_sink.py",
+      "line": 28,
+      "rule": "scanner_output.semgrep-configs.python.flask.security.insecure-deserialization",
+      "description": "Detected the use of an insecure deserialization library in a Flask route. These libraries are prone to code execution vulnerabilities. Ensure user data does not enter this function. To fix this, try to avoid serializing whole objects. Consider instead using a serializer such as JSON.",
+      "cwe": [
+        "CWE-502"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://docs.python.org/3/library/pickle.html",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "20fb90b49cbb967f"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Avoid using `pickle`, which is known to lead to code execution vulnerabilities. When unpickling, the serialized data could be manipulated to run arbitrary code. Instead, consider serializing the relevant data as JSON or ",
+      "severity": "MEDIUM",
+      "path": "kitchen_sink.py",
+      "line": 28,
+      "rule": "scanner_output.semgrep-configs.python.lang.security.deserialization.avoid-pickle",
+      "description": "Avoid using `pickle`, which is known to lead to code execution vulnerabilities. When unpickling, the serialized data could be manipulated to run arbitrary code. Instead, consider serializing the relevant data as JSON or a similar text-based serialization format.",
+      "cwe": [
+        "CWE-502"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://docs.python.org/3/library/pickle.html",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "cf0b2c52bd250bc5"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Detected Flask app with debug=True. Do not deploy to production with this flag enabled as it will leak sensitive information. Instead, consider using Flask configuration variables or setting 'debug' using system environm",
+      "severity": "MEDIUM",
+      "path": "kitchen_sink.py",
+      "line": 39,
+      "rule": "scanner_output.semgrep-configs.python.flask.security.audit.debug-enabled",
+      "description": "Detected Flask app with debug=True. Do not deploy to production with this flag enabled as it will leak sensitive information. Instead, consider using Flask configuration variables or setting 'debug' using system environment variables.",
+      "cwe": [
+        "CWE-489"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://labs.detectify.com/2015/10/02/how-patreon-got-hacked-publicly-exposed-werkzeug-debugger/",
+      "confidence": "HIGH",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "8b90435aee9e0266"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Detected MD5 hash algorithm which is considered insecure. MD5 is not collision resistant and is therefore not suitable as a cryptographic signature. Use SHA256 or SHA3 instead.",
+      "severity": "MEDIUM",
+      "path": "legacy_code.py",
+      "line": 4,
+      "rule": "scanner_output.semgrep-configs.python.lang.security.insecure-hash-algorithm-md5",
+      "description": "Detected MD5 hash algorithm which is considered insecure. MD5 is not collision resistant and is therefore not suitable as a cryptographic signature. Use SHA256 or SHA3 instead.",
+      "cwe": [
+        "CWE-327"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://www.schneier.com/blog/archives/2012/10/when_will_we_se.html",
+      "confidence": "MEDIUM",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "eb2a1f09840a3397"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "It looks like MD5 is used as a password hash. MD5 is not considered a secure password hash because it can be cracked by an attacker in a short amount of time. Use a suitable password hashing function such as scrypt. You ",
+      "severity": "MEDIUM",
+      "path": "legacy_code.py",
+      "line": 4,
+      "rule": "scanner_output.semgrep-configs.python.lang.security.audit.md5-used-as-password",
+      "description": "It looks like MD5 is used as a password hash. MD5 is not considered a secure password hash because it can be cracked by an attacker in a short amount of time. Use a suitable password hashing function such as scrypt. You can use `hashlib.scrypt`.",
+      "cwe": [
+        "CWE-327"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://tools.ietf.org/html/rfc6151",
+      "confidence": "MEDIUM",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "8fc91136ce147b97"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Package dependencies with variant versions may lead to dependency hijack and confusion attacks. Better to specify an exact version or use package-lock.json for a specific version of the package.",
+      "severity": "MEDIUM",
+      "path": "package.json",
+      "line": 23,
+      "rule": "scanner_output.semgrep-configs.json.npm.security.package-dependencies-check",
+      "description": "Package dependencies with variant versions may lead to dependency hijack and confusion attacks. Better to specify an exact version or use package-lock.json for a specific version of the package.",
+      "cwe": [
+        "CWE-427"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://security.snyk.io/vuln/SNYK-JS-COLORS-2331906",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "997434366122c949"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Package dependencies with variant versions may lead to dependency hijack and confusion attacks. Better to specify an exact version or use package-lock.json for a specific version of the package.",
+      "severity": "MEDIUM",
+      "path": "package.json",
+      "line": 24,
+      "rule": "scanner_output.semgrep-configs.json.npm.security.package-dependencies-check",
+      "description": "Package dependencies with variant versions may lead to dependency hijack and confusion attacks. Better to specify an exact version or use package-lock.json for a specific version of the package.",
+      "cwe": [
+        "CWE-427"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://security.snyk.io/vuln/SNYK-JS-COLORS-2331906",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "d05a410ff7d90e86"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Package dependencies with variant versions may lead to dependency hijack and confusion attacks. Better to specify an exact version or use package-lock.json for a specific version of the package.",
+      "severity": "MEDIUM",
+      "path": "package.json",
+      "line": 25,
+      "rule": "scanner_output.semgrep-configs.json.npm.security.package-dependencies-check",
+      "description": "Package dependencies with variant versions may lead to dependency hijack and confusion attacks. Better to specify an exact version or use package-lock.json for a specific version of the package.",
+      "cwe": [
+        "CWE-427"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://security.snyk.io/vuln/SNYK-JS-COLORS-2331906",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "601c5d725df8e232"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Package dependencies with variant versions may lead to dependency hijack and confusion attacks. Better to specify an exact version or use package-lock.json for a specific version of the package.",
+      "severity": "MEDIUM",
+      "path": "package.json",
+      "line": 26,
+      "rule": "scanner_output.semgrep-configs.json.npm.security.package-dependencies-check",
+      "description": "Package dependencies with variant versions may lead to dependency hijack and confusion attacks. Better to specify an exact version or use package-lock.json for a specific version of the package.",
+      "cwe": [
+        "CWE-427"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://security.snyk.io/vuln/SNYK-JS-COLORS-2331906",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "1524bd5d2dddd665"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "A gitleaks aws-access-token was detected which attempts to identify hard-coded credentials. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or ",
+      "severity": "INFO",
+      "path": "readme.md",
+      "line": 5,
+      "rule": "scanner_output.semgrep-configs.generic.secrets.gitleaks.aws-access-token",
+      "description": "A gitleaks aws-access-token was detected which attempts to identify hard-coded credentials. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+      "cwe": [
+        "CWE-798"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "13cda3b814436771"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "A gitleaks aws-access-token was detected which attempts to identify hard-coded credentials. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or ",
+      "severity": "INFO",
+      "path": "secrets.txt",
+      "line": 1,
+      "rule": "scanner_output.semgrep-configs.generic.secrets.gitleaks.aws-access-token",
+      "description": "A gitleaks aws-access-token was detected which attempts to identify hard-coded credentials. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+      "cwe": [
+        "CWE-798"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "f33fcbe1778daab0"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "Private Key detected. This is a sensitive credential and should not be hardcoded here. Instead, store this in a separate, private file.",
+      "severity": "HIGH",
+      "path": "secrets.txt",
+      "line": 7,
+      "rule": "scanner_output.semgrep-configs.generic.secrets.security.detected-private-key",
+      "description": "Private Key detected. This is a sensitive credential and should not be hardcoded here. Instead, store this in a separate, private file.",
+      "cwe": [
+        "CWE-798"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "6110b4334bf09164"
+    },
+    {
+      "scanner": "Semgrep",
+      "category": "security",
+      "title": "A gitleaks private-key was detected which attempts to identify hard-coded credentials. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or exter",
+      "severity": "INFO",
+      "path": "secrets.txt",
+      "line": 7,
+      "rule": "scanner_output.semgrep-configs.generic.secrets.gitleaks.private-key",
+      "description": "A gitleaks private-key was detected which attempts to identify hard-coded credentials. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+      "cwe": [
+        "CWE-798"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "semgrep_output.json",
+      "reference": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
+      "confidence": "LOW",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "d5d2696b631b6b5b"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "Directory traversal in Django",
+      "severity": "CRITICAL",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2011-0698",
+      "description": "Directory traversal vulnerability in Django 1.1.x before 1.1.4 and 1.2.x before 1.2.5 on Windows might allow remote attackers to read or execute files via a / (slash) character in a key in a session cookie, related to session replays.",
+      "cwe": [
+        "CWE-22"
+      ],
+      "cve": "CVE-2011-0698",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.1.4, 1.2.5",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2011-0698",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "2a12737ecdff29df"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "The (1) django.http.HttpResponseRedirect and (2) django.http.HttpRespo ...",
+      "severity": "CRITICAL",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2012-3442",
+      "description": "The (1) django.http.HttpResponseRedirect and (2) django.http.HttpResponsePermanentRedirect classes in Django before 1.3.2 and 1.4.x before 1.4.1 do not validate the scheme of a redirect target, which might allow remote attackers to conduct cross-site scripting (XSS) attacks via a data: URL.",
+      "cwe": [
+        "CWE-79"
+      ],
+      "cve": "CVE-2012-3442",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.3.2, 1.4.1",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2012-3442",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "0a7904e03992c381"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "python-django: unexpected code execution using reverse()",
+      "severity": "CRITICAL",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2014-0472",
+      "description": "The django.core.urlresolvers.reverse function in Django before 1.4.11, 1.5.x before 1.5.6, 1.6.x before 1.6.3, and 1.7.x before 1.7 beta 2 allows remote attackers to import and execute arbitrary Python modules by leveraging a view that constructs URLs using user input and a \"dotted Python path.\"",
+      "cwe": [
+        "CWE-94"
+      ],
+      "cve": "CVE-2014-0472",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.4.11, 1.5.6, 1.6.3",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2014-0472",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "8cae1978e171c3c8"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "Django: crafted email address allows account takeover",
+      "severity": "CRITICAL",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2019-19844",
+      "description": "Django before 1.11.27, 2.x before 2.2.9, and 3.x before 3.0.1 allows account takeover. A suitably crafted email address (that is equal to an existing user's email address after case transformation of Unicode characters) would allow an attacker to be sent a password reset token for the matched user account. (One mitigation in the new releases is to send password reset tokens only to the registered user email address.)",
+      "cwe": [
+        "CWE-640"
+      ],
+      "cve": "CVE-2019-19844",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.11.27, 2.2.9, 3.0.1",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2019-19844",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "3fe4111f140e13aa"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "django: potential SQL injection via StringAgg(delimiter)",
+      "severity": "CRITICAL",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2020-7471",
+      "description": "Django 1.11 before 1.11.28, 2.2 before 2.2.10, and 3.0 before 3.0.3 allows SQL Injection if untrusted data is used as a StringAgg delimiter (e.g., in Django applications that offer downloads of data as a series of rows with a user-specified column delimiter). By passing a suitably crafted delimiter to a contrib.postgres.aggregates.StringAgg instance, it was possible to break escaping and inject malicious SQL.",
+      "cwe": [
+        "CWE-89"
+      ],
+      "cve": "CVE-2020-7471",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.11.28, 2.2.10, 3.0.3",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2020-7471",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "ce738bb908addcc1"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "django: Django SQL injection",
+      "severity": "CRITICAL",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2025-64459",
+      "description": "An issue was discovered in 5.1 before 5.1.14, 4.2 before 4.2.26, and 5.2 before 5.2.8. The methods `QuerySet.filter()`, `QuerySet.exclude()`, and `QuerySet.get()`, and the class `Q()`, are subject to SQL injection when using a suitably crafted dictionary, with dictionary expansion, as the `_connector` argument. Earlier, unsupported Django series (such as 5.0.x, 4.1.x, and 3.2.x) were not evaluated and may also be affected. Django would like to thank cyberstan for reporting this issue.",
+      "cwe": [
+        "CWE-89"
+      ],
+      "cve": "CVE-2025-64459",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "5.2.8, 5.1.14, 4.2.26",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2025-64459",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "3419da0467e6d239"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "The administrative interface in django.contrib.admin in Django before  ...",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2010-4534",
+      "description": "The administrative interface in django.contrib.admin in Django before 1.1.3, 1.2.x before 1.2.4, and 1.3.x before 1.3 beta 1 does not properly restrict use of the query string to perform certain object filtering, which allows remote authenticated users to obtain sensitive information via a series of requests containing regular expressions, as demonstrated by a created_by__password__regex parameter.",
+      "cwe": [
+        "CWE-264"
+      ],
+      "cve": "CVE-2010-4534",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.1.3, 1.2.4",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2010-4534",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "2fe1d903b82c2e29"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "Django 1.1.x before 1.1.4 and 1.2.x before 1.2.5 does not properly val ...",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2011-0696",
+      "description": "Django 1.1.x before 1.1.4 and 1.2.x before 1.2.5 does not properly validate HTTP requests that contain an X-Requested-With header, which makes it easier for remote attackers to conduct cross-site request forgery (CSRF) attacks via forged AJAX requests that leverage a \"combination of browser plugins and redirects,\" a related issue to CVE-2011-0447.",
+      "cwe": [
+        "CWE-352"
+      ],
+      "cve": "CVE-2011-0696",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.1.4, 1.2.5",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2011-0696",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "843d03448bbb9929"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "The verify_exists functionality in the URLField implementation in Djan ...",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2011-4137",
+      "description": "The verify_exists functionality in the URLField implementation in Django before 1.2.7 and 1.3.x before 1.3.1 relies on Python libraries that attempt access to an arbitrary URL with no timeout, which allows remote attackers to cause a denial of service (resource consumption) via a URL associated with (1) a slow response, (2) a completed TCP connection with no application data sent, or (3) a large amount of application data, a related issue to CVE-2011-1521.",
+      "cwe": [
+        "CWE-399"
+      ],
+      "cve": "CVE-2011-4137",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.2.7, 1.3.1",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2011-4137",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "aaf630e80f8c0b0d"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "The verify_exists functionality in the URLField implementation in Djan ...",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2011-4138",
+      "description": "The verify_exists functionality in the URLField implementation in Django before 1.2.7 and 1.3.x before 1.3.1 originally tests a URL's validity through a HEAD request, but then uses a GET request for the new target URL in the case of a redirect, which might allow remote attackers to trigger arbitrary GET requests with an unintended source IP address via a crafted Location header.",
+      "cwe": [
+        "CWE-20"
+      ],
+      "cve": "CVE-2011-4138",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.2.7, 1.3.1",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2011-4138",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "03f8b611a2cbf05d"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "Django before 1.2.7 and 1.3.x before 1.3.1 uses a request's HTTP Host  ...",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2011-4139",
+      "description": "Django before 1.2.7 and 1.3.x before 1.3.1 uses a request's HTTP Host header to construct a full URL in certain circumstances, which allows remote attackers to conduct cache poisoning attacks via a crafted request.",
+      "cwe": [
+        "CWE-20"
+      ],
+      "cve": "CVE-2011-4139",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.2.7, 1.3.1",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2011-4139",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "c2e7208ba33a2e70"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "The CSRF protection mechanism in Django through 1.2.7 and 1.3.x throug ...",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2011-4140",
+      "description": "The CSRF protection mechanism in Django through 1.2.7 and 1.3.x through 1.3.1 does not properly handle web-server configurations supporting arbitrary HTTP Host headers, which allows remote attackers to trigger unauthenticated forged requests via vectors involving a DNS CNAME record and a web page containing JavaScript code.",
+      "cwe": [
+        "CWE-352"
+      ],
+      "cve": "CVE-2011-4140",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2011-4140",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "9756c803ca0287a5"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "The django.forms.ImageField class in the form system in Django before  ...",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2012-3443",
+      "description": "The django.forms.ImageField class in the form system in Django before 1.3.2 and 1.4.x before 1.4.1 completely decompresses image data during image validation, which allows remote attackers to cause a denial of service (memory consumption) by uploading an image file.",
+      "cwe": [
+        "CWE-20"
+      ],
+      "cve": "CVE-2012-3443",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.3.2, 1.4.1",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2012-3443",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "ea6bf9e432471e64"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "The get_image_dimensions function in the image-handling functionality  ...",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2012-3444",
+      "description": "The get_image_dimensions function in the image-handling functionality in Django before 1.3.2 and 1.4.x before 1.4.1 uses a constant chunk size in all attempts to determine dimensions, which allows remote attackers to cause a denial of service (process or thread consumption) via a large TIFF image.",
+      "cwe": [
+        "CWE-119"
+      ],
+      "cve": "CVE-2012-3444",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.3.2, 1.4.1",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2012-3444",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "8be052768598143d"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "python-django: caching of anonymous pages could reveal CSRF token",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2014-0473",
+      "description": "The caching framework in Django before 1.4.11, 1.5.x before 1.5.6, 1.6.x before 1.6.3, and 1.7.x before 1.7 beta 2 reuses a cached CSRF token for all anonymous users, which allows remote attackers to bypass CSRF protections by reading the CSRF cookie for anonymous users.",
+      "cwe": [
+        "CWE-264"
+      ],
+      "cve": "CVE-2014-0473",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.4.11, 1.5.6, 1.6.3",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2014-0473",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "972eacac1ad0fcf7"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "python-django: MySQL typecasting",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2014-0474",
+      "description": "The (1) FilePathField, (2) GenericIPAddressField, and (3) IPAddressField model field classes in Django before 1.4.11, 1.5.x before 1.5.6, 1.6.x before 1.6.3, and 1.7.x before 1.7 beta 2 do not properly perform type conversion, which allows remote attackers to have unspecified impact and vectors, related to \"MySQL typecasting.\"",
+      "cwe": [
+        "CWE-399"
+      ],
+      "cve": "CVE-2014-0474",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.4.11, 1.5.6, 1.6.3",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2014-0474",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "ef4b076341495a9f"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "Django: reverse() can generate URLs pointing to other hosts, leading to phishing attacks",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2014-0480",
+      "description": "The core.urlresolvers.reverse function in Django before 1.4.14, 1.5.x before 1.5.9, 1.6.x before 1.6.6, and 1.7 before release candidate 3 does not properly validate URLs, which allows remote attackers to conduct phishing attacks via a // (slash slash) in a URL, which triggers a scheme-relative URL to be generated.",
+      "cwe": [
+        "CWE-20"
+      ],
+      "cve": "CVE-2014-0480",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.4.14, 1.5.9, 1.6.6",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2014-0480",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "c33b9d005b9f0e42"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "Django: file upload denial of service",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2014-0481",
+      "description": "The default configuration for the file upload handling system in Django before 1.4.14, 1.5.x before 1.5.9, 1.6.x before 1.6.6, and 1.7 before release candidate 3 uses a sequential file name generation process when a file with a conflicting name is uploaded, which allows remote attackers to cause a denial of service (CPU consumption) by unloading a multiple files with the same name.",
+      "cwe": [
+        "CWE-399"
+      ],
+      "cve": "CVE-2014-0481",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.4.14, 1.5.9, 1.6.6",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2014-0481",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "a28c51efd91ceab1"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "Django: denial of service attack against django.views.static.serve",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2015-0221",
+      "description": "The django.views.static.serve view in Django before 1.4.18, 1.6.x before 1.6.10, and 1.7.x before 1.7.3 reads files an entire line at a time, which allows remote attackers to cause a denial of service (memory consumption) via a long line in a file.",
+      "cwe": [
+        "CWE-399"
+      ],
+      "cve": "CVE-2015-0221",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.4.18, 1.6.10, 1.7.3",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2015-0221",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "612e2ae6200059b9"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "Django: possible DoS by filling session store",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2015-5143",
+      "description": "The session backends in Django before 1.4.21, 1.5.x through 1.6.x, 1.7.x before 1.7.9, and 1.8.x before 1.8.3 allows remote attackers to cause a denial of service (session store consumption) via multiple requests with unique session keys.",
+      "cwe": [
+        "CWE-399"
+      ],
+      "cve": "CVE-2015-5143",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.4.21, 1.7.9, 1.8.3",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2015-5143",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "aeaade5227882e6c"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "Django: possible header injection due to validators accepting newlines in input",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2015-5144",
+      "description": "Django before 1.4.21, 1.5.x through 1.6.x, 1.7.x before 1.7.9, and 1.8.x before 1.8.3 uses an incorrect regular expression, which allows remote attackers to inject arbitrary headers and conduct HTTP response splitting attacks via a newline character in an (1) email message to the EmailValidator, a (2) URL to the URLValidator, or unspecified vectors to the (3) validate_ipv4_address or (4) validate_slug validator.",
+      "cwe": [
+        "CWE-20"
+      ],
+      "cve": "CVE-2015-5144",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.4.21, 1.7.9, 1.8.3",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2015-5144",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "de7176208bdcf6fd"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "python-django: CSRF protection bypass on a site with Google Analytics",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2016-7401",
+      "description": "The cookie parsing code in Django before 1.8.15 and 1.9.x before 1.9.10, when used on a site with Google Analytics, allows remote attackers to bypass an intended CSRF protection mechanism by setting arbitrary cookies.",
+      "cwe": [
+        "CWE-254"
+      ],
+      "cve": "CVE-2016-7401",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.8.15, 1.9.10",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2016-7401",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "b88627f52ae684ae"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "An issue was discovered in the HTTP FileResponse class in Django 3.2 b ...",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2022-36359",
+      "description": "An issue was discovered in the HTTP FileResponse class in Django 3.2 before 3.2.15 and 4.0 before 4.0.7. An application is vulnerable to a reflected file download (RFD) attack that sets the Content-Disposition header of a FileResponse when the filename is derived from user-supplied input.",
+      "cwe": [
+        "CWE-494"
+      ],
+      "cve": "CVE-2022-36359",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "3.2.15, 4.0.7",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2022-36359",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "6b3480dbe2cd8c37"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "django: Django SQL injection in FilteredRelation column aliases",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2025-57833",
+      "description": "An issue was discovered in Django 4.2 before 4.2.24, 5.1 before 5.1.12, and 5.2 before 5.2.6. FilteredRelation is subject to SQL injection in column aliases, using a suitably crafted dictionary, with dictionary expansion, as the **kwargs passed QuerySet.annotate() or QuerySet.alias().",
+      "cwe": [
+        "CWE-89"
+      ],
+      "cve": "CVE-2025-57833",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "4.2.24, 5.1.12, 5.2.6",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2025-57833",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "47302d112e773c19"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "Django: Denial-of-service vulnerability in Django on Windows",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2025-64458",
+      "description": "An issue was discovered in 5.1 before 5.1.14, 4.2 before 4.2.26, and 5.2 before 5.2.8. NFKC normalization in Python is slow on Windows. As a consequence, `django.http.HttpResponseRedirect`, `django.http.HttpResponsePermanentRedirect`, and the shortcut `django.shortcuts.redirect`  were subject to a potential  denial-of-service attack via certain inputs with a very large number of Unicode characters. Earlier, unsupported Django series (such as 5.0.x, 4.1.x, and 3.2.x) were not evaluated and may also be affected. Django would like to thank Seokchan Yoon for reporting this issue.",
+      "cwe": [
+        "CWE-407"
+      ],
+      "cve": "CVE-2025-64458",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "5.2.8, 5.1.14, 4.2.26",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2025-64458",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "2fa07c3eae4f639d"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "django: Django: Remote code execution via GeoDjango spatial lookups",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2026-15307",
+      "description": "An issue was discovered in Django 5.2 before 5.2.17 and 6.0 before 6.0.8. GeoDjango spatial lookups optimistically parse the right-hand-side value as a raster by passing it to the `django.contrib.gis.gdal.GDALRaster` constructor. Any value used in a spatial lookup against a `GeometryField` or `RasterField` reaches this constructor, including untrusted input, for example a spatial-field filter submitted through the Django admin changelist query string by a staff user with view permission. A `dict`, or a `str` holding its JSON representation, is opened in write mode regardless of the constructor",
+      "cwe": [
+        "CWE-73",
+        "CWE-918"
+      ],
+      "cve": "CVE-2026-15307",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "5.2.17, 6.0.8",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2026-15307",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "0ccf9f6737cb198a"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "Cross-site scripting (XSS) vulnerability in Django 1.2.x before 1.2.2  ...",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2010-3082",
+      "description": "Cross-site scripting (XSS) vulnerability in Django 1.2.x before 1.2.2 allows remote attackers to inject arbitrary web script or HTML via a csrfmiddlewaretoken (aka csrf_token) cookie.",
+      "cwe": [
+        "CWE-79"
+      ],
+      "cve": "CVE-2010-3082",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.2.2",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2010-3082",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "4f5633a30c830638"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "The password reset functionality in django.contrib.auth in Django befo ...",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2010-4535",
+      "description": "The password reset functionality in django.contrib.auth in Django before 1.1.3, 1.2.x before 1.2.4, and 1.3.x before 1.3 beta 1 does not validate the length of a string representing a base36 timestamp, which allows remote attackers to cause a denial of service (resource consumption) via a URL that specifies a large base36 integer.",
+      "cwe": [
+        "CWE-20"
+      ],
+      "cve": "CVE-2010-4535",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.1.3, 1.2.4",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2010-4535",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "b8689ed86780faf9"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "Cross-site scripting (XSS) vulnerability in Django 1.1.x before 1.1.4  ...",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2011-0697",
+      "description": "Cross-site scripting (XSS) vulnerability in Django 1.1.x before 1.1.4 and 1.2.x before 1.2.5 might allow remote attackers to inject arbitrary web script or HTML via a filename associated with a file upload.",
+      "cwe": [
+        "CWE-79"
+      ],
+      "cve": "CVE-2011-0697",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.1.4, 1.2.5",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2011-0697",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "d587f7c9f2a97166"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "django.contrib.sessions in Django before 1.2.7 and 1.3.x before 1.3.1, ...",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2011-4136",
+      "description": "django.contrib.sessions in Django before 1.2.7 and 1.3.x before 1.3.1, when session data is stored in the cache, uses the root namespace for both session identifiers and application-data keys, which allows remote attackers to modify a session by triggering use of a key that is equal to that session's identifier.",
+      "cwe": [
+        "CWE-20"
+      ],
+      "cve": "CVE-2011-4136",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.2.7, 1.3.1",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2011-4136",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "24117e33962480f6"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "Django: RemoteUserMiddleware session hijacking",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2014-0482",
+      "description": "The contrib.auth.middleware.RemoteUserMiddleware middleware in Django before 1.4.14, 1.5.x before 1.5.9, 1.6.x before 1.6.6, and 1.7 before release candidate 3, when using the contrib.auth.backends.RemoteUserBackend backend, allows remote authenticated users to hijack web sessions via vectors related to the REMOTE_USER header.",
+      "cwe": [
+        "CWE-287"
+      ],
+      "cve": "CVE-2014-0482",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.4.14, 1.5.9, 1.6.6, 1.7c3",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2014-0482",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "a148de8735734aa3"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "Django: data leakage via querystring manipulation in admin",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2014-0483",
+      "description": "The administrative interface (contrib.admin) in Django before 1.4.14, 1.5.x before 1.5.9, 1.6.x before 1.6.6, and 1.7 before release candidate 3 does not check if a field represents a relationship between models, which allows remote authenticated users to obtain sensitive information via a to_field parameter in a popup action to an admin change form page, as demonstrated by a /admin/auth/user/?pop=1&t=password URI.",
+      "cwe": [
+        "CWE-264"
+      ],
+      "cve": "CVE-2014-0483",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.4.14, 1.5.9, 1.6.6, 1.7c3",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2014-0483",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "8e023edc2538b38f"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "Django: WSGI header spoofing via underscore/dash conflation",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2015-0219",
+      "description": "Django before 1.4.18, 1.6.x before 1.6.10, and 1.7.x before 1.7.3 allows remote attackers to spoof WSGI headers by using an _ (underscore) character instead of a - (dash) character in an HTTP header, as demonstrated by an X-Auth_User header.",
+      "cwe": [
+        "CWE-17"
+      ],
+      "cve": "CVE-2015-0219",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.4.18, 1.6.10, 1.7.3",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2015-0219",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "6377fbb9949072cb"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "Django: Mitigated possible XSS attack via user-supplied redirect URLs",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2015-0220",
+      "description": "The django.util.http.is_safe_url function in Django before 1.4.18, 1.6.x before 1.6.10, and 1.7.x before 1.7.3 does not properly handle leading whitespaces, which allows remote attackers to conduct cross-site scripting (XSS) attacks via a crafted URL, related to redirect URLs, as demonstrated by a \"\\njavascript:\" URL.",
+      "cwe": [
+        "CWE-79"
+      ],
+      "cve": "CVE-2015-0220",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.4.18, 1.6.10, 1.7.3",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2015-0220",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "96f08bc1203598c2"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "Django: XSS attack via properties in ModelAdmin.readonly_fields",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2015-2241",
+      "description": "Cross-site scripting (XSS) vulnerability in the contents function in admin/helpers.py in Django before 1.7.6 and 1.8 before 1.8b2 allows remote attackers to inject arbitrary web script or HTML via a model attribute in ModelAdmin.readonly_fields, as demonstrated by a @property.",
+      "cwe": [
+        "CWE-79"
+      ],
+      "cve": "CVE-2015-2241",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.7.6, 1.8b2",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2015-2241",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "1f1788ff82a85db6"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "Django: possible XSS attack via user-supplied redirect URLs",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2015-2317",
+      "description": "The utils.http.is_safe_url function in Django before 1.4.20, 1.5.x, 1.6.x before 1.6.11, 1.7.x before 1.7.7, and 1.8.x before 1.8c1 does not properly validate URLs, which allows remote attackers to conduct cross-site scripting (XSS) attacks via a control character in a URL, as demonstrated by a \\x08javascript: URL.",
+      "cwe": [
+        "CWE-79"
+      ],
+      "cve": "CVE-2015-2317",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.4.20, 1.6.11, 1.7.7, 1.8c1",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2015-2317",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "e5629f105fd9e4b7"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "python-django: Malicious redirect and possible XSS attack via user-supplied redirect URLs containing basic auth",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2016-2512",
+      "description": "The utils.http.is_safe_url function in Django before 1.8.10 and 1.9.x before 1.9.3 allows remote attackers to redirect users to arbitrary web sites and conduct phishing attacks or possibly conduct cross-site scripting (XSS) attacks via a URL containing basic authentication, as demonstrated by http://mysite.example.com\\@attacker.com.",
+      "cwe": [
+        "CWE-79"
+      ],
+      "cve": "CVE-2016-2512",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.8.10, 1.9.3",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2016-2512",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "198ef27e20d50293"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "django: XSS in admin's add/change related popup",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2016-6186",
+      "description": "Cross-site scripting (XSS) vulnerability in the dismissChangeRelatedObjectPopup function in contrib/admin/static/admin/js/admin/RelatedObjectLookups.js in Django before 1.8.14, 1.9.x before 1.9.8, and 1.10.x before 1.10rc1 allows remote attackers to inject arbitrary web script or HTML via vectors involving unsafe usage of Element.innerHTML.",
+      "cwe": [
+        "CWE-79"
+      ],
+      "cve": "CVE-2016-6186",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.8.14, 1.9.8, 1.10rc1",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2016-6186",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "b01677f53517e9bb"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "django: Potential directory traversal via ``admindocs``",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2021-33203",
+      "description": "Django before 2.2.24, 3.x before 3.1.12, and 3.2.x before 3.2.4 has a potential directory traversal via django.contrib.admindocs. Staff members could use the TemplateDetailView view to check the existence of arbitrary files. Additionally, if (and only if) the default admindocs templates have been customized by application developers to also show file contents, then not only the existence but also the file contents would have been exposed. In other words, there is directory traversal outside of the template root directories.",
+      "cwe": [
+        "CWE-22"
+      ],
+      "cve": "CVE-2021-33203",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "2.2.24, 3.1.12, 3.2.4",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2021-33203",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "f59e5b6946d1df40"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "python-django: Potential user email enumeration via response status on password reset",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2024-45231",
+      "description": "An issue was discovered in Django v5.1.1, v5.0.9, and v4.2.16. The django.contrib.auth.forms.PasswordResetForm class, when used in a view implementing password reset flows, allows remote attackers to enumerate user e-mail addresses by sending password reset requests and observing the outcome (only when e-mail sending is consistently failing).",
+      "cwe": [
+        "CWE-203"
+      ],
+      "cve": "CVE-2024-45231",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "5.1.1, 5.0.9, 4.2.16",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2024-45231",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "926323db278838f3"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "django: Django Path Injection Vulnerability",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2025-48432",
+      "description": "An issue was discovered in Django 5.2 before 5.2.3, 5.1 before 5.1.11, and 4.2 before 4.2.23. Internal HTTP response logging does not escape request.path, which allows remote attackers to potentially manipulate log output via crafted URLs. This may lead to log injection or forgery when logs are viewed in terminals or processed by external systems.",
+      "cwe": [
+        "CWE-117"
+      ],
+      "cve": "CVE-2025-48432",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "5.2.2, 5.1.10, 4.2.22",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2025-48432",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "84960abb0bafa4a6"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "django: Django: Denial of Service via parsing deeply nested geometry collections",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2026-15830",
+      "description": "An issue was discovered in Django 6.0 before 6.0.9 and 5.2 before 5.2.18. GeoDjango's `django.contrib.gis.geos.GEOSGeometry` is subject to a potential denial-of-service when parsing deeply nested `GEOMETRYCOLLECTION` objects supplied as well-known text (WKT), well-known binary (WKB), or hex-encoded WKB, which triggers unbounded recursion and a segmentation fault in the underlying GEOS library. Spatial field lookups and the `django.contrib.gis.forms.GeometryField` form field are also affected. Earlier, unsupported Django series (such as 5.1.x, 5.0.x, and 4.2.x) were not evaluated and may also b",
+      "cwe": [
+        "CWE-674"
+      ],
+      "cve": "CVE-2026-15830",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "5.2.17, 6.0.8, 6.1.1",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2026-15830",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "ab62c6b1321e77aa"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "django: Django: Information disclosure via heap buffer over-read in GDALRaster",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2026-53877",
+      "description": "An issue was discovered in Django 6.0 before 6.0.7 and 5.2 before 5.2.16. `django.contrib.gis.gdal.GDALRaster` over-reads its in-memory buffer when constructed from a bytes object, which can disclose adjacent memory or cause service degradation via a potential segmentation fault when the `vsi_buffer` property is accessed. Earlier, unsupported Django series (such as 5.0.x, 4.1.x, and 3.2.x) were not evaluated and may also be affected. Django would like to thank Bence Nagy for reporting this issue.",
+      "cwe": [
+        "CWE-805"
+      ],
+      "cve": "CVE-2026-53877",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "5.2.16, 6.0.7",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2026-53877",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "25f9bdb084baf73e"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "django: Django: HTTP header injection via DomainNameValidator accepting newlines",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2026-53878",
+      "description": "An issue was discovered in Django 6.0 before 6.0.7 and 5.2 before 5.2.16. `DomainNameValidator` does not prohibit newlines in domain names (unless used via a form field, since `CharField` strips newlines). If an application uses values with newlines in an HTTP response, header injection can occur. Django itself is unaffected because `HttpResponse` prohibits newlines in HTTP headers. Earlier, unsupported Django series (such as 5.0.x, 4.1.x, and 3.2.x) were not evaluated and may also be affected. Django would like to thank Bence Nagy for reporting this issue.",
+      "cwe": [
+        "CWE-144"
+      ],
+      "cve": "CVE-2026-53878",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "5.2.16, 6.0.7",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2026-53878",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "e5f1e097a9425d01"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "python-django: User enumeration through timing difference on password hasher work factor upgrade",
+      "severity": "LOW",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2016-2513",
+      "description": "The password hasher in contrib/auth/hashers.py in Django before 1.8.10 and 1.9.x before 1.9.3 allows remote attackers to enumerate users via a timing attack involving login requests.",
+      "cwe": [
+        "CWE-200"
+      ],
+      "cve": "CVE-2016-2513",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "1.8.10, 1.9.3",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2016-2513",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "aa4c95a201c8306a"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "django: Django: Information disclosure via improper handling of Vary header whitespace",
+      "severity": "LOW",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2026-48587",
+      "description": "An issue was discovered in Django 5.2 before 5.2.15 and 6.0 before 6.0.6. `django.utils.cache.has_vary_header()` in Django does not strip leading or trailing whitespace from `Vary` response header values before comparison, which allows remote attackers to read cached responses via requests to URLs whose responses contain whitespace-padded Vary header values. Earlier, unsupported Django series (such as 5.0.x, 4.1.x, and 3.2.x) were not evaluated and may also be affected. Django would like to thank Navid Rezazadeh for reporting this issue.",
+      "cwe": [
+        "CWE-1023"
+      ],
+      "cve": "CVE-2026-48587",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "5.2.15, 6.0.6",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2026-48587",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "d8ee210db7672e34"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "django: Django: Information disclosure due to improper caching of Set-Cookie responses",
+      "severity": "LOW",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2026-48588",
+      "description": "An issue was discovered in Django 6.0 before 6.0.7 and 5.2 before 5.2.16. `UpdateCacheMiddleware` and the `cache_page()` decorator cache responses that vary on cookies when the incoming request carries unrelated cookies, which allows remote attackers to read private data from the shared cache. Earlier, unsupported Django series (such as 5.0.x, 4.1.x, and 3.2.x) were not evaluated and may also be affected. Django would like to thank Chris Whyland for reporting this issue.",
+      "cwe": [
+        "CWE-524"
+      ],
+      "cve": "CVE-2026-48588",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "5.2.16, 6.0.7",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2026-48588",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "b2b24336df4cc451"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "python-django: Django: Information disclosure via non-injective cookie salt derivation",
+      "severity": "LOW",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2026-6873",
+      "description": "An issue was discovered in Django 6.0 before 6.0.6 and 5.2 before 5.2.15. `django.http.HttpRequest.get_signed_cookie` in Django uses a non-injective salt derivation (concatenating the cookie name and salt argument), which allows a remote attacker to use a cookie in a context different from the one where it was signed, via distinct `(name, salt)` pairs that produce the same concatenation. Earlier, unsupported Django series (such as 5.0.x, 4.1.x, and 3.2.x) were not evaluated and may also be affected. Django would like to thank Peng Zhou for reporting this issue.",
+      "cwe": [
+        "CWE-347"
+      ],
+      "cve": "CVE-2026-6873",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "5.2.15, 6.0.6",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2026-6873",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "5ad544539b08ae1e"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "Django: Django: Information disclosure due to improper handling of Cache-Control directives",
+      "severity": "LOW",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2026-8404",
+      "description": "An issue was discovered in Django 5.2 before 5.2.15 and 6.0 before 6.0.6. `django.middleware.cache.UpdateCacheMiddleware` in Django does not match `Cache-Control` response directives case-insensitively, which allows remote attackers to read responses that were incorrectly cached because their `Cache-Control` directives used uppercase or mixed-case values. Earlier, unsupported Django series (such as 5.0.x, 4.1.x, and 3.2.x) were not evaluated and may also be affected. Django would like to thank Ahmed Badawe for reporting this issue.",
+      "cwe": [
+        "CWE-178"
+      ],
+      "cve": "CVE-2026-8404",
+      "package": "django",
+      "installed_version": "1.2",
+      "fixed_version": "5.2.15, 6.0.6",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2026-8404",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "e27316c0f54beb44"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "python-flask: Denial of Service via crafted JSON file",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2018-1000656",
+      "description": "The Pallets Project flask version Before 0.12.3 contains a CWE-20: Improper Input Validation vulnerability in flask that can result in Large amount of memory usage possibly leading to denial of service. This attack appear to be exploitable via Attacker provides JSON data in incorrect encoding. This vulnerability appears to have been fixed in 0.12.3. NOTE: this may overlap CVE-2019-1010083.",
+      "cwe": [
+        "CWE-20"
+      ],
+      "cve": "CVE-2018-1000656",
+      "package": "flask",
+      "installed_version": "0.12",
+      "fixed_version": "0.12.3",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2018-1000656",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "13fa992e6e49fbba"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "python-flask: unexpected memory usage can lead to denial of service via crafted encoded JSON data",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2019-1010083",
+      "description": "The Pallets Project Flask before 1.0 is affected by: unexpected memory usage. The impact is: denial of service. The attack vector is: crafted encoded JSON data. The fixed version is: 1. NOTE: this may overlap CVE-2018-1000656.",
+      "cwe": [],
+      "cve": "CVE-2019-1010083",
+      "package": "flask",
+      "installed_version": "0.12",
+      "fixed_version": "1.0",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2019-1010083",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "bf51876dc9d44336"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "flask: Possible disclosure of permanent session cookie due to missing Vary: Cookie header",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2023-30861",
+      "description": "Flask is a lightweight WSGI web application framework. When all of the following conditions are met, a response containing data intended for one client may be cached and subsequently sent by the proxy to other clients. If the proxy also caches `Set-Cookie` headers, it may send one client's `session` cookie to other clients. The severity depends on the application's use of the session and the proxy's behavior regarding cookies. The risk depends on all these conditions being met.  1. The application must be hosted behind a caching proxy that does not strip cookies or ignore responses with cookie",
+      "cwe": [
+        "CWE-539"
+      ],
+      "cve": "CVE-2023-30861",
+      "package": "flask",
+      "installed_version": "0.12",
+      "fixed_version": "2.3.2, 2.2.5",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2023-30861",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "a72a42d078c6b07c"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "flask: Flask: Information disclosure via improper caching of session data",
+      "severity": "LOW",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2026-27205",
+      "description": "Flask is a web server gateway interface (WSGI) web application framework. In versions 3.1.2 and below, when the session object is accessed, Flask should set the Vary: Cookie header., resulting in a Use of Cache Containing Sensitive Information vulnerability. The logic instructs caches not to cache the response, as it may contain information specific to a logged in user. This is handled in most cases, but some forms of access such as the Python in operator were overlooked. The severity and risk depend on the application being hosted behind a caching proxy that doesn't ignore responses with cook",
+      "cwe": [
+        "CWE-524"
+      ],
+      "cve": "CVE-2026-27205",
+      "package": "flask",
+      "installed_version": "0.12",
+      "fixed_version": "3.1.3",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2026-27205",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "0b4cd334a6d0266b"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "python-requests: Redirect from HTTPS to HTTP does not remove Authorization header",
+      "severity": "HIGH",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2018-18074",
+      "description": "The Requests package before 2.20.0 for Python sends an HTTP Authorization header to an http URI upon receiving a same-hostname https-to-http redirect, which makes it easier for remote attackers to discover credentials by sniffing the network.",
+      "cwe": [
+        "CWE-522"
+      ],
+      "cve": "CVE-2018-18074",
+      "package": "requests",
+      "installed_version": "2.19.0",
+      "fixed_version": "2.20.0",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2018-18074",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "67081c5b1fc2a563"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "python-requests: Unintended leak of Proxy-Authorization header",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2023-32681",
+      "description": "Requests is a HTTP library. Since Requests 2.3.0, Requests has been leaking Proxy-Authorization headers to destination servers when redirected to an HTTPS endpoint. This is a product of how we use `rebuild_proxies` to reattach the `Proxy-Authorization` header to requests. For HTTP connections sent through the tunnel, the proxy will identify the header in the request itself and remove it prior to forwarding to the destination server. However when sent over HTTPS, the `Proxy-Authorization` header must be sent in the CONNECT request as the proxy has no visibility into the tunneled request. This r",
+      "cwe": [
+        "CWE-200"
+      ],
+      "cve": "CVE-2023-32681",
+      "package": "requests",
+      "installed_version": "2.19.0",
+      "fixed_version": "2.31.0",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2023-32681",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "577fd7f2412c6bb2"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "requests: subsequent requests to the same host ignore cert verification",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2024-35195",
+      "description": "Requests is a HTTP library. Prior to 2.32.0, when making requests through a Requests `Session`, if the first request is made with `verify=False` to disable cert verification, all subsequent requests to the same host will continue to ignore cert verification regardless of changes to the value of `verify`. This behavior will continue for the lifecycle of the connection in the connection pool. This vulnerability is fixed in 2.32.0.",
+      "cwe": [
+        "CWE-670"
+      ],
+      "cve": "CVE-2024-35195",
+      "package": "requests",
+      "installed_version": "2.19.0",
+      "fixed_version": "2.32.0",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2024-35195",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "3e5e0d721b5d0e15"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "requests: Requests vulnerable to .netrc credentials leak via malicious URLs",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2024-47081",
+      "description": "Requests is a HTTP library. Due to a URL parsing issue, Requests releases prior to 2.32.4 may leak .netrc credentials to third parties for specific maliciously-crafted URLs. Users should upgrade to version 2.32.4 to receive a fix. For older versions of Requests, use of the .netrc file can be disabled with `trust_env=False` on one's Requests Session.",
+      "cwe": [
+        "CWE-522"
+      ],
+      "cve": "CVE-2024-47081",
+      "package": "requests",
+      "installed_version": "2.19.0",
+      "fixed_version": "2.32.4",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2024-47081",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "9780be8655951397"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Dependency vulnerability",
+      "title": "requests: Requests: Security bypass due to predictable temporary file creation",
+      "severity": "MEDIUM",
+      "path": "requirements.txt",
+      "line": null,
+      "rule": "CVE-2026-25645",
+      "description": "Requests is a HTTP library. Prior to version 2.33.0, the `requests.utils.extract_zipped_paths()` utility function uses a predictable filename when extracting files from zip archives into the system temporary directory. If the target file already exists, it is reused without validation. A local attacker with write access to the temp directory could pre-create a malicious file that would be loaded in place of the legitimate one. Standard usage of the Requests library is not affected by this vulnerability. Only applications that call `extract_zipped_paths()` directly are impacted. Starting in ver",
+      "cwe": [
+        "CWE-377"
+      ],
+      "cve": "CVE-2026-25645",
+      "package": "requests",
+      "installed_version": "2.19.0",
+      "fixed_version": "2.33.0",
+      "source": "trivy_output_offline.json",
+      "reference": "https://avd.aquasec.com/nvd/cve-2026-25645",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "c9e128a5c76ae870"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Potential secret",
+      "title": "Asymmetric Private Key",
+      "severity": "HIGH",
+      "path": "config.py",
+      "line": 9,
+      "rule": "private-key",
+      "description": "Potential secret detected; value withheld.",
+      "cwe": [],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "trivy_output_offline.json",
+      "reference": "",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "4468cfb6100c9a15"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Potential secret",
+      "title": "Stripe Secret Key",
+      "severity": "CRITICAL",
+      "path": "config.py",
+      "line": 6,
+      "rule": "stripe-secret-token",
+      "description": "Potential secret detected; value withheld.",
+      "cwe": [],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "trivy_output_offline.json",
+      "reference": "",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "0cc082048c4a5f5c"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Potential secret",
+      "title": "Google (GCP) Service-account",
+      "severity": "CRITICAL",
+      "path": "credentials.json",
+      "line": 2,
+      "rule": "gcp-service-account",
+      "description": "Potential secret detected; value withheld.",
+      "cwe": [],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "trivy_output_offline.json",
+      "reference": "",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "6d99db479565218f"
+    },
+    {
+      "scanner": "Trivy",
+      "category": "Potential secret",
+      "title": "Asymmetric Private Key",
+      "severity": "HIGH",
+      "path": "secrets.txt",
+      "line": 8,
+      "rule": "private-key",
+      "description": "Potential secret detected; value withheld.",
+      "cwe": [],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "trivy_output_offline.json",
+      "reference": "",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "32d4dcc2744c6591"
+    },
+    {
+      "scanner": "Bandit",
+      "category": "SAST",
+      "title": "hardcoded_password_string",
+      "severity": "LOW",
+      "path": "config.py",
+      "line": 2,
+      "rule": "B105",
+      "description": "Possible hardcoded credential (value withheld).",
+      "cwe": [
+        "CWE-259"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "bandit_output.json",
+      "reference": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "confidence": "MEDIUM",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "fce2272eac911bb9"
+    },
+    {
+      "scanner": "Bandit",
+      "category": "SAST",
+      "title": "hardcoded_password_string",
+      "severity": "LOW",
+      "path": "config.py",
+      "line": 4,
+      "rule": "B105",
+      "description": "Possible hardcoded credential (value withheld).",
+      "cwe": [
+        "CWE-259"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "bandit_output.json",
+      "reference": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "confidence": "MEDIUM",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "f383b9aa8eafa350"
+    },
+    {
+      "scanner": "Bandit",
+      "category": "SAST",
+      "title": "blacklist",
+      "severity": "LOW",
+      "path": "kitchen_sink.py",
+      "line": 3,
+      "rule": "B403",
+      "description": "Consider possible security implications associated with pickle module.",
+      "cwe": [
+        "CWE-502"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "bandit_output.json",
+      "reference": "https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b403-import-pickle",
+      "confidence": "HIGH",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "89c08880a9c31903"
+    },
+    {
+      "scanner": "Bandit",
+      "category": "SAST",
+      "title": "hardcoded_sql_expressions",
+      "severity": "MEDIUM",
+      "path": "kitchen_sink.py",
+      "line": 18,
+      "rule": "B608",
+      "description": "Possible SQL injection vector through string-based query construction.",
+      "cwe": [
+        "CWE-89"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "bandit_output.json",
+      "reference": "https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html",
+      "confidence": "MEDIUM",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "0daa1908065d22cc"
+    },
+    {
+      "scanner": "Bandit",
+      "category": "SAST",
+      "title": "start_process_with_a_shell",
+      "severity": "HIGH",
+      "path": "kitchen_sink.py",
+      "line": 22,
+      "rule": "B605",
+      "description": "Starting a process with a shell, possible injection detected, security issue.",
+      "cwe": [
+        "CWE-78"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "bandit_output.json",
+      "reference": "https://bandit.readthedocs.io/en/1.9.4/plugins/b605_start_process_with_a_shell.html",
+      "confidence": "HIGH",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "3fd1d40d84b03c52"
+    },
+    {
+      "scanner": "Bandit",
+      "category": "SAST",
+      "title": "blacklist",
+      "severity": "MEDIUM",
+      "path": "kitchen_sink.py",
+      "line": 28,
+      "rule": "B301",
+      "description": "Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.",
+      "cwe": [
+        "CWE-502"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "bandit_output.json",
+      "reference": "https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b301-pickle",
+      "confidence": "HIGH",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "0a9d8209729834c4"
+    },
+    {
+      "scanner": "Bandit",
+      "category": "SAST",
+      "title": "flask_debug_true",
+      "severity": "HIGH",
+      "path": "kitchen_sink.py",
+      "line": 39,
+      "rule": "B201",
+      "description": "A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",
+      "cwe": [
+        "CWE-94"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "bandit_output.json",
+      "reference": "https://bandit.readthedocs.io/en/1.9.4/plugins/b201_flask_debug_true.html",
+      "confidence": "MEDIUM",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "adfefd3f3a78014c"
+    },
+    {
+      "scanner": "Bandit",
+      "category": "SAST",
+      "title": "hashlib",
+      "severity": "HIGH",
+      "path": "legacy_code.py",
+      "line": 4,
+      "rule": "B324",
+      "description": "Use of weak MD5 hash for security. Consider usedforsecurity=False",
+      "cwe": [
+        "CWE-327"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "bandit_output.json",
+      "reference": "https://bandit.readthedocs.io/en/1.9.4/plugins/b324_hashlib.html",
+      "confidence": "HIGH",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "8a9e124cd8f404fc"
+    },
+    {
+      "scanner": "Bandit",
+      "category": "SAST",
+      "title": "hardcoded_password_string",
+      "severity": "LOW",
+      "path": "legacy_code.py",
+      "line": 9,
+      "rule": "B105",
+      "description": "Possible hardcoded credential (value withheld).",
+      "cwe": [
+        "CWE-259"
+      ],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "bandit_output.json",
+      "reference": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "confidence": "MEDIUM",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "55aeb6443f9fb3a5"
+    },
+    {
+      "scanner": "ESLint",
+      "category": "Security lint rule",
+      "title": "security/detect-child-process",
+      "severity": "UNKNOWN",
+      "path": "broken_gate.js",
+      "line": 10,
+      "rule": "security/detect-child-process",
+      "description": "Found child_process.exec() with non Literal first argument",
+      "cwe": [],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "eslint_output.json",
+      "reference": "",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "a1a7d8d58f93814e"
+    },
+    {
+      "scanner": "ESLint",
+      "category": "Code quality",
+      "title": "no-unused-vars",
+      "severity": "UNKNOWN",
+      "path": "broken_gate.js",
+      "line": 10,
+      "rule": "no-unused-vars",
+      "description": "'stderr' is defined but never used.",
+      "cwe": [],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "eslint_output.json",
+      "reference": "",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "a50254cc96817e11"
+    },
+    {
+      "scanner": "ESLint",
+      "category": "Code quality",
+      "title": "no-unused-vars",
+      "severity": "UNKNOWN",
+      "path": "broken_gate.js",
+      "line": 20,
+      "rule": "no-unused-vars",
+      "description": "'result' is assigned a value but never used.",
+      "cwe": [],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "eslint_output.json",
+      "reference": "",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "bf6890c8b0b54365"
+    },
+    {
+      "scanner": "ESLint",
+      "category": "Security lint rule",
+      "title": "security/detect-eval-with-expression",
+      "severity": "UNKNOWN",
+      "path": "broken_gate.js",
+      "line": 20,
+      "rule": "security/detect-eval-with-expression",
+      "description": "eval with argument of type MemberExpression",
+      "cwe": [],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "eslint_output.json",
+      "reference": "",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "b1ce7606fe3d0e95"
+    },
+    {
+      "scanner": "ESLint",
+      "category": "Code quality",
+      "title": "no-unused-vars",
+      "severity": "UNKNOWN",
+      "path": "broken_gate.js",
+      "line": 26,
+      "rule": "no-unused-vars",
+      "description": "'hash' is assigned a value but never used.",
+      "cwe": [],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "eslint_output.json",
+      "reference": "",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "19469c2a894e4382"
+    },
+    {
+      "scanner": "Gitleaks",
+      "category": "Potential secret",
+      "title": "Detected a Generic API Key, potentially exposing access to various services and sensitive operations.",
+      "severity": "UNKNOWN",
+      "path": "kitchen_sink.py",
+      "line": 32,
+      "rule": "generic-api-key",
+      "description": "Potential secret detected. Match and secret values withheld.",
+      "cwe": [],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "gitleaks_output.json",
+      "reference": "",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "a5925986f5ef3a58"
+    },
+    {
+      "scanner": "Gitleaks",
+      "category": "Potential secret",
+      "title": "Identified a Private Key, which may compromise cryptographic security and sensitive data encryption.",
+      "severity": "UNKNOWN",
+      "path": "config.py",
+      "line": 8,
+      "rule": "private-key",
+      "description": "Potential secret detected. Match and secret values withheld.",
+      "cwe": [],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "gitleaks_output.json",
+      "reference": "",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "620d91a487b58efb"
+    },
+    {
+      "scanner": "Gitleaks",
+      "category": "Potential secret",
+      "title": "Found a Stripe Access Token, posing a risk to payment processing services and sensitive financial data.",
+      "severity": "UNKNOWN",
+      "path": "config.py",
+      "line": 6,
+      "rule": "stripe-access-token",
+      "description": "Potential secret detected. Match and secret values withheld.",
+      "cwe": [],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "gitleaks_output.json",
+      "reference": "",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "7ba10dc49c63d820"
+    },
+    {
+      "scanner": "Gitleaks",
+      "category": "Potential secret",
+      "title": "Detected a Generic API Key, potentially exposing access to various services and sensitive operations.",
+      "severity": "UNKNOWN",
+      "path": "secrets.txt",
+      "line": 5,
+      "rule": "generic-api-key",
+      "description": "Potential secret detected. Match and secret values withheld.",
+      "cwe": [],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "gitleaks_output.json",
+      "reference": "",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "f9911a4dc2687c11"
+    },
+    {
+      "scanner": "Gitleaks",
+      "category": "Potential secret",
+      "title": "Identified a Private Key, which may compromise cryptographic security and sensitive data encryption.",
+      "severity": "UNKNOWN",
+      "path": "secrets.txt",
+      "line": 7,
+      "rule": "private-key",
+      "description": "Potential secret detected. Match and secret values withheld.",
+      "cwe": [],
+      "cve": "",
+      "package": "",
+      "installed_version": "",
+      "fixed_version": "",
+      "source": "gitleaks_output.json",
+      "reference": "",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "ebeab601c8be76ec"
+    },
+    {
+      "scanner": ".NET",
+      "category": "Dependency vulnerability",
+      "title": "Vulnerable NuGet package: Microsoft.Extensions.Caching.Memory",
+      "severity": "HIGH",
+      "path": "DotNetVulnerabilityTest.csproj",
+      "line": null,
+      "rule": "GHSA-qj66-m88j-hmgj",
+      "description": "NuGet vulnerability advisory reported by dotnet.",
+      "cwe": [],
+      "cve": "",
+      "package": "Microsoft.Extensions.Caching.Memory",
+      "installed_version": "6.0.1",
+      "fixed_version": "",
+      "source": "dotnet_output.txt",
+      "reference": "https://github.com/advisories/GHSA-qj66-m88j-hmgj",
+      "confidence": "",
+      "disposition": "Unverified",
+      "reachability": "Not assessed",
+      "impact": "Requires review",
+      "fix": "Requires review",
+      "id": "91a1e40cc125cd64"
+    }
+  ],
+  "packages": [
+    {
+      "name": "actions/checkout",
+      "version": "v7",
+      "purl": "pkg:github/actions/checkout@v7",
+      "license": "Not identified",
+      "relationship": "Unknown",
+      "source": "Syft CycloneDX",
+      "location": "",
+      "sources": [
+        "Syft CycloneDX",
+        "Syft SPDX"
+      ]
+    },
+    {
+      "name": "actions/setup-node",
+      "version": "v7",
+      "purl": "pkg:github/actions/setup-node@v7",
+      "license": "Not identified",
+      "relationship": "Unknown",
+      "source": "Syft CycloneDX",
+      "location": "",
+      "sources": [
+        "Syft CycloneDX",
+        "Syft SPDX"
+      ]
+    },
+    {
+      "name": "beemojs/conventional-pr-action",
+      "version": "v3",
+      "purl": "pkg:github/beemojs/conventional-pr-action@v3",
+      "license": "Not identified",
+      "relationship": "Unknown",
+      "source": "Syft CycloneDX",
+      "location": "",
+      "sources": [
+        "Syft CycloneDX",
+        "Syft SPDX"
+      ]
+    },
+    {
+      "name": "C:\\Users\\dhrut\\OneDrive\\Desktop\\abb_hackathon\\sgc-gatekeeper-testbed",
+      "version": "",
+      "purl": "",
+      "license": "Not identified",
+      "relationship": "Unknown",
+      "source": "Syft SPDX",
+      "location": "",
+      "sources": [
+        "Syft SPDX"
+      ]
+    },
+    {
+      "name": "django",
+      "version": "1.2",
+      "purl": "pkg:pypi/django@1.2",
+      "license": "Not assessed",
+      "relationship": "Unknown",
+      "source": "Trivy",
+      "location": "requirements.txt",
+      "sources": [
+        "Trivy",
+        "Syft CycloneDX",
+        "Syft SPDX"
+      ]
+    },
+    {
+      "name": "flask",
+      "version": "0.12",
+      "purl": "pkg:pypi/flask@0.12",
+      "license": "Not assessed",
+      "relationship": "Unknown",
+      "source": "Trivy",
+      "location": "requirements.txt",
+      "sources": [
+        "Trivy",
+        "Syft CycloneDX",
+        "Syft SPDX"
+      ]
+    },
+    {
+      "name": "googleapis/release-please-action",
+      "version": "v4",
+      "purl": "pkg:github/googleapis/release-please-action@v4",
+      "license": "Not identified",
+      "relationship": "Unknown",
+      "source": "Syft CycloneDX",
+      "location": "",
+      "sources": [
+        "Syft CycloneDX",
+        "Syft SPDX"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40cacheable/memory@2.2.0",
+      "version": "2.2.0",
+      "purl": "pkg:npm/%40cacheable/memory@2.2.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40cacheable/utils@2.5.0",
+      "version": "2.5.0",
+      "purl": "pkg:npm/%40cacheable/utils@2.5.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40eslint-community/eslint-utils@4.10.1",
+      "version": "4.10.1",
+      "purl": "pkg:npm/%40eslint-community/eslint-utils@4.10.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40eslint-community/regexpp@4.12.3",
+      "version": "4.12.3",
+      "purl": "pkg:npm/%40eslint-community/regexpp@4.12.3",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40eslint/config-array@0.23.6",
+      "version": "0.23.6",
+      "purl": "pkg:npm/%40eslint/config-array@0.23.6",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40eslint/config-helpers@0.7.0",
+      "version": "0.7.0",
+      "purl": "pkg:npm/%40eslint/config-helpers@0.7.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40eslint/core@1.2.1",
+      "version": "1.2.1",
+      "purl": "pkg:npm/%40eslint/core@1.2.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40eslint/js",
+      "version": "^10.0.1",
+      "purl": "pkg:npm/%40eslint/js",
+      "license": "Not assessed",
+      "relationship": "Direct",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40eslint/js@10.0.1",
+      "version": "10.0.1",
+      "purl": "pkg:npm/%40eslint/js@10.0.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40eslint/object-schema@3.0.5",
+      "version": "3.0.5",
+      "purl": "pkg:npm/%40eslint/object-schema@3.0.5",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40eslint/plugin-kit@0.7.3",
+      "version": "0.7.3",
+      "purl": "pkg:npm/%40eslint/plugin-kit@0.7.3",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40humanfs/core@0.19.2",
+      "version": "0.19.2",
+      "purl": "pkg:npm/%40humanfs/core@0.19.2",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40humanfs/node@0.16.8",
+      "version": "0.16.8",
+      "purl": "pkg:npm/%40humanfs/node@0.16.8",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40humanfs/types@0.15.0",
+      "version": "0.15.0",
+      "purl": "pkg:npm/%40humanfs/types@0.15.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40humanwhocodes/module-importer@1.0.1",
+      "version": "1.0.1",
+      "purl": "pkg:npm/%40humanwhocodes/module-importer@1.0.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40humanwhocodes/retry@0.4.3",
+      "version": "0.4.3",
+      "purl": "pkg:npm/%40humanwhocodes/retry@0.4.3",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40isaacs/nonrecursive-glob-match@1.1.0",
+      "version": "1.1.0",
+      "purl": "pkg:npm/%40isaacs/nonrecursive-glob-match@1.1.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40keyv/bigmap@1.3.1",
+      "version": "1.3.1",
+      "purl": "pkg:npm/%40keyv/bigmap@1.3.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40keyv/serialize@1.1.1",
+      "version": "1.1.1",
+      "purl": "pkg:npm/%40keyv/serialize@1.1.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40types/esrecurse@4.3.1",
+      "version": "4.3.1",
+      "purl": "pkg:npm/%40types/esrecurse@4.3.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40types/estree@1.0.10",
+      "version": "1.0.10",
+      "purl": "pkg:npm/%40types/estree@1.0.10",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/%40types/json-schema@7.0.15",
+      "version": "7.0.15",
+      "purl": "pkg:npm/%40types/json-schema@7.0.15",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/acorn-jsx@5.3.2",
+      "version": "5.3.2",
+      "purl": "pkg:npm/acorn-jsx@5.3.2",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/acorn@8.19.0",
+      "version": "8.19.0",
+      "purl": "pkg:npm/acorn@8.19.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/ajv@6.15.0",
+      "version": "6.15.0",
+      "purl": "pkg:npm/ajv@6.15.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/balanced-match@4.0.4",
+      "version": "4.0.4",
+      "purl": "pkg:npm/balanced-match@4.0.4",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/brace-expansion@5.0.13",
+      "version": "5.0.13",
+      "purl": "pkg:npm/brace-expansion@5.0.13",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/cacheable@2.5.0",
+      "version": "2.5.0",
+      "purl": "pkg:npm/cacheable@2.5.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/cross-spawn@7.0.6",
+      "version": "7.0.6",
+      "purl": "pkg:npm/cross-spawn@7.0.6",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/debug@4.4.3",
+      "version": "4.4.3",
+      "purl": "pkg:npm/debug@4.4.3",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/deep-is@0.1.4",
+      "version": "0.1.4",
+      "purl": "pkg:npm/deep-is@0.1.4",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/escape-string-regexp@4.0.0",
+      "version": "4.0.0",
+      "purl": "pkg:npm/escape-string-regexp@4.0.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/eslint",
+      "version": "^10.15.0",
+      "purl": "pkg:npm/eslint",
+      "license": "Not assessed",
+      "relationship": "Direct",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/eslint-plugin-no-unsanitized",
+      "version": "^4.1.5",
+      "purl": "pkg:npm/eslint-plugin-no-unsanitized",
+      "license": "Not assessed",
+      "relationship": "Direct",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/eslint-plugin-no-unsanitized@4.1.5",
+      "version": "4.1.5",
+      "purl": "pkg:npm/eslint-plugin-no-unsanitized@4.1.5",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/eslint-plugin-security",
+      "version": "^4.2.1",
+      "purl": "pkg:npm/eslint-plugin-security",
+      "license": "Not assessed",
+      "relationship": "Direct",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/eslint-plugin-security@4.2.1",
+      "version": "4.2.1",
+      "purl": "pkg:npm/eslint-plugin-security@4.2.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/eslint-scope@9.1.2",
+      "version": "9.1.2",
+      "purl": "pkg:npm/eslint-scope@9.1.2",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/eslint-visitor-keys@3.4.3",
+      "version": "3.4.3",
+      "purl": "pkg:npm/eslint-visitor-keys@3.4.3",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/eslint-visitor-keys@5.0.1",
+      "version": "5.0.1",
+      "purl": "pkg:npm/eslint-visitor-keys@5.0.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/eslint@10.15.0",
+      "version": "10.15.0",
+      "purl": "pkg:npm/eslint@10.15.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/espree@11.2.0",
+      "version": "11.2.0",
+      "purl": "pkg:npm/espree@11.2.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/esquery@1.7.0",
+      "version": "1.7.0",
+      "purl": "pkg:npm/esquery@1.7.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/esrecurse@4.3.0",
+      "version": "4.3.0",
+      "purl": "pkg:npm/esrecurse@4.3.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/estraverse@5.3.0",
+      "version": "5.3.0",
+      "purl": "pkg:npm/estraverse@5.3.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/esutils@2.0.3",
+      "version": "2.0.3",
+      "purl": "pkg:npm/esutils@2.0.3",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/fast-deep-equal@3.1.3",
+      "version": "3.1.3",
+      "purl": "pkg:npm/fast-deep-equal@3.1.3",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/fast-json-stable-stringify@2.1.0",
+      "version": "2.1.0",
+      "purl": "pkg:npm/fast-json-stable-stringify@2.1.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/fast-levenshtein@2.0.6",
+      "version": "2.0.6",
+      "purl": "pkg:npm/fast-levenshtein@2.0.6",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/file-entry-cache@11.1.5",
+      "version": "11.1.5",
+      "purl": "pkg:npm/file-entry-cache@11.1.5",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/find-up@5.0.0",
+      "version": "5.0.0",
+      "purl": "pkg:npm/find-up@5.0.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/flat-cache@6.1.23",
+      "version": "6.1.23",
+      "purl": "pkg:npm/flat-cache@6.1.23",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/flatted@3.4.4",
+      "version": "3.4.4",
+      "purl": "pkg:npm/flatted@3.4.4",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/glob-parent@6.0.2",
+      "version": "6.0.2",
+      "purl": "pkg:npm/glob-parent@6.0.2",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/globals",
+      "version": "^17.14.0",
+      "purl": "pkg:npm/globals",
+      "license": "Not assessed",
+      "relationship": "Direct",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/globals@17.14.0",
+      "version": "17.14.0",
+      "purl": "pkg:npm/globals@17.14.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/hashery@1.5.1",
+      "version": "1.5.1",
+      "purl": "pkg:npm/hashery@1.5.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/hookified@1.15.1",
+      "version": "1.15.1",
+      "purl": "pkg:npm/hookified@1.15.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/hookified@2.2.0",
+      "version": "2.2.0",
+      "purl": "pkg:npm/hookified@2.2.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/ignore@5.3.2",
+      "version": "5.3.2",
+      "purl": "pkg:npm/ignore@5.3.2",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/imurmurhash@0.1.4",
+      "version": "0.1.4",
+      "purl": "pkg:npm/imurmurhash@0.1.4",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/is-extglob@2.1.1",
+      "version": "2.1.1",
+      "purl": "pkg:npm/is-extglob@2.1.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/is-glob@4.0.3",
+      "version": "4.0.3",
+      "purl": "pkg:npm/is-glob@4.0.3",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/isexe@2.0.0",
+      "version": "2.0.0",
+      "purl": "pkg:npm/isexe@2.0.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/json-schema-traverse@0.4.1",
+      "version": "0.4.1",
+      "purl": "pkg:npm/json-schema-traverse@0.4.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/json-stable-stringify-without-jsonify@1.0.1",
+      "version": "1.0.1",
+      "purl": "pkg:npm/json-stable-stringify-without-jsonify@1.0.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/keyv@5.6.0",
+      "version": "5.6.0",
+      "purl": "pkg:npm/keyv@5.6.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/levn@0.4.1",
+      "version": "0.4.1",
+      "purl": "pkg:npm/levn@0.4.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/locate-path@6.0.0",
+      "version": "6.0.0",
+      "purl": "pkg:npm/locate-path@6.0.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/minimatch@11.0.8",
+      "version": "11.0.8",
+      "purl": "pkg:npm/minimatch@11.0.8",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/ms@2.1.3",
+      "version": "2.1.3",
+      "purl": "pkg:npm/ms@2.1.3",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/natural-compare@1.4.0",
+      "version": "1.4.0",
+      "purl": "pkg:npm/natural-compare@1.4.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/optionator@0.9.4",
+      "version": "0.9.4",
+      "purl": "pkg:npm/optionator@0.9.4",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/p-limit@3.1.0",
+      "version": "3.1.0",
+      "purl": "pkg:npm/p-limit@3.1.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/p-locate@5.0.0",
+      "version": "5.0.0",
+      "purl": "pkg:npm/p-locate@5.0.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/path-exists@4.0.0",
+      "version": "4.0.0",
+      "purl": "pkg:npm/path-exists@4.0.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/path-key@3.1.1",
+      "version": "3.1.1",
+      "purl": "pkg:npm/path-key@3.1.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/prelude-ls@1.2.1",
+      "version": "1.2.1",
+      "purl": "pkg:npm/prelude-ls@1.2.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/punycode@2.3.1",
+      "version": "2.3.1",
+      "purl": "pkg:npm/punycode@2.3.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/qified@0.10.1",
+      "version": "0.10.1",
+      "purl": "pkg:npm/qified@0.10.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/regexp-tree@0.1.27",
+      "version": "0.1.27",
+      "purl": "pkg:npm/regexp-tree@0.1.27",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/safe-regex@2.1.1",
+      "version": "2.1.1",
+      "purl": "pkg:npm/safe-regex@2.1.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/shebang-command@2.0.0",
+      "version": "2.0.0",
+      "purl": "pkg:npm/shebang-command@2.0.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/shebang-regex@3.0.0",
+      "version": "3.0.0",
+      "purl": "pkg:npm/shebang-regex@3.0.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/type-check@0.4.0",
+      "version": "0.4.0",
+      "purl": "pkg:npm/type-check@0.4.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/uri-js@4.4.1",
+      "version": "4.4.1",
+      "purl": "pkg:npm/uri-js@4.4.1",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/which@2.0.2",
+      "version": "2.0.2",
+      "purl": "pkg:npm/which@2.0.2",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/word-wrap@1.2.5",
+      "version": "1.2.5",
+      "purl": "pkg:npm/word-wrap@1.2.5",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "pkg:npm/yocto-queue@0.1.0",
+      "version": "0.1.0",
+      "purl": "pkg:npm/yocto-queue@0.1.0",
+      "license": "Not assessed",
+      "relationship": "Transitive",
+      "source": "ScanCode dependency",
+      "location": "sgc-gatekeeper-testbed/package-lock.json",
+      "sources": [
+        "ScanCode dependency"
+      ]
+    },
+    {
+      "name": "requests",
+      "version": "2.19.0",
+      "purl": "pkg:pypi/requests@2.19.0",
+      "license": "Not assessed",
+      "relationship": "Unknown",
+      "source": "Trivy",
+      "location": "requirements.txt",
+      "sources": [
+        "Trivy",
+        "Syft CycloneDX",
+        "Syft SPDX"
+      ]
+    },
+    {
+      "name": "sgc-gatekeeper-testbed",
+      "version": "1.0.0",
+      "purl": "pkg:npm/sgc-gatekeeper-testbed@1.0.0",
+      "license": "ISC",
+      "relationship": "Unknown",
+      "source": "ScanCode",
+      "location": "sgc-gatekeeper-testbed/package.json",
+      "sources": [
+        "ScanCode",
+        "Syft CycloneDX",
+        "Syft SPDX"
+      ]
+    }
+  ],
+  "license_summary": {
+    "declared_license": "isc",
+    "license_clarity_score": 0,
+    "primary_language": "JavaScript"
+  }
+}
