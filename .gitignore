@@ -26,3 +26,5 @@ Thumbs.db
 /scanner_output/gitleaks_output.json
 /scanner_output/semgrep_output.txt
 /scanner_output/semgrep-configs/generic/secrets/security/detected-slack-webhook.yaml
+# Vulnerable application test repositories
+dotnet-aspgoat/

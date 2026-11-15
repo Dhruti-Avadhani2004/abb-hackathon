@@ -2,7 +2,9 @@
 import subprocess
 import os
 
-repo_path = r"sgc-gatekeeper-testbed"
+from scan_config import TARGET_DIR
+
+repo_path = str(TARGET_DIR)
 output_file = r"scanner_output\trivy_output_offline.json"
 cache_dir = r"trivy-cache"
 

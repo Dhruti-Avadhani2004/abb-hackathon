@@ -6,7 +6,7 @@ import json
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-TARGET_DIR = BASE_DIR / "sgc-gatekeeper-testbed"
+from scan_config import TARGET_DIR
 OUTPUT_DIR = BASE_DIR / "scanner_output"
 
 ESLINT_CMD = TARGET_DIR / "node_modules" / ".bin" / "eslint.cmd"

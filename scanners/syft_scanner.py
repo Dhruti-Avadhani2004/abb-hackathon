@@ -7,7 +7,7 @@ from pathlib import Path
 # Project paths
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-TARGET_DIR = BASE_DIR / "sgc-gatekeeper-testbed"
+from scan_config import TARGET_DIR
 OUTPUT_DIR = BASE_DIR / "scanner_output"
 
 CYCLONEDX_FILE = OUTPUT_DIR / "sbom_cyclonedx.json"

@@ -15,7 +15,7 @@ SCANCODE_DIR = (
 
 SCANCODE_CMD = SCANCODE_DIR / "scancode.bat"
 
-TARGET_DIR = BASE_DIR / "sgc-gatekeeper-testbed"
+from scan_config import TARGET_DIR
 OUTPUT_DIR = BASE_DIR / "scanner_output"
 
 JSON_REPORT = OUTPUT_DIR / "scancode_output.json"
